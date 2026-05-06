@@ -1,3 +1,16 @@
+"""Module for creating new fractal.
+
+Does generation on formule fractal and it's image.
+Also adds this image at the table.
+
+Contains:
+    Fractal - the class which does all action from the top of the file
+
+Author: Viktoria Chelpykh
+Date: 20226-05-6 
+"""
+
+
 from PIL import Image, ImageTk, ImageDraw
 import customtkinter as ctk
 from customtkinter import CTkImage
@@ -9,6 +22,7 @@ ALL_IMAGES = []
 
 
 class Fractal():
+    """The class for creating fractal."""
     def __init__(self, width, height, n,
                  xmin, xmax, ymin, ymax,
                  red, green, blue):
@@ -25,6 +39,19 @@ class Fractal():
         self.blue = blue
     
     def generation(self):
+        """The functon for generation fractal on formule.
+
+        This functon does translation from coordinates to pixels
+        and after that put different colors in pixels on the
+        math formule.
+
+        Args:
+            None
+        
+            
+        Returns:
+            None
+        """
         for px in range(self.width):
             for py in range(self.height):
                 x = self.xmin + px * ((self.xmax - self.xmin) / self.width)
@@ -42,7 +69,16 @@ class Fractal():
                 else:
                     self.img.putpixel((px, py), (0, 0, 0))
 
-    def image(self, canvas):       
+    def image(self, canvas):
+        """The function puts image of fractal in the
+        center of canvas.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.tk_image = ImageTk.PhotoImage(self.img) 
         canvas.delete("all")
         canvas.create_image(canvas.winfo_width()//2,
@@ -51,6 +87,21 @@ class Fractal():
                             image = self.tk_image)
 
     def add_in_table(self, gallery, canvas):
+        """The functions adds new image of the fractal
+        at the gallery.
+
+        The function does corner radios on the picture
+        and add it in the correct place at the table.
+
+        Args:
+            gallery: The gallery where there are all
+                     fractals which was generated
+            canvas: The canvas where threre are
+                    image of the fractal
+
+        Returns:
+            None
+        """
         current_img = self.img.copy()
         current_img.thumbnail((150, 150), Image.LANCZOS)
         mask = Image.new('L', current_img.size, 0)

@@ -1,4 +1,32 @@
+"""Module for checking inputs.
+
+Contains:
+    int_number() - the function for checking int numbers
+    float_number() - the function for checking float numbers
+    check_bounds() - the function for checking numbers' bounds
+
+Author: Viktoria Chelpykh
+Date: 2026-05-06
+"""
+
+
 def int_number(entry_current, meaning):
+    """The function for checking int numbers.
+    
+    The function check numbers on thier values. 
+    If it is width or height it should be more than 99
+    and should be int. If it is number of iterations
+    it should be positive and int. If it is color
+    it should be in range (0, 255) and int.
+
+    Args:
+        entry_current (ctk.CtkEntry): the entry where threre is a number which user entered
+        meaning (str): The value of current entry
+
+    Returns:
+        - int: If input is correct, returns a number which user entered
+        - str: If input is uncorrect, returns an error message
+    """
     try:
         value_string = entry_current.get()
         value_int = int(value_string)
@@ -23,6 +51,15 @@ def int_number(entry_current, meaning):
 
 
 def float_number(entry_current):
+    """The function for checking float numbers.
+
+    Args:
+        entry_current (ctk.CtkEntry): the entry where threre is a number which user entered
+
+    Returns:
+        - float: If input is correct, returns a number which user entered
+        - str: If input is uncorrect, returns an error message
+    """
     try:
         value = float(entry_current.get())
         return value
@@ -31,6 +68,18 @@ def float_number(entry_current):
     
     
 def check_bounds(current_min, current_max, meaning_min, meaning_max):
+    """The function for checking numbers' bounds.
+
+    Args:
+        current_min (float): probable minimum
+        current_min (float): probable maximum
+        meaning_min (str): value of probable minimum
+        meaning_max (str): value of probable maximum
+
+    Returns:
+        - bull: If input is correct, returns True
+        - str: If input is uncorrect, returns an error message
+    """
     if current_min < current_max:
         return True
     else:

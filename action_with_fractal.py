@@ -1,3 +1,17 @@
+"""Module for fractal action.
+
+Module draws, save fractal and also can clean gallery with fractals.
+
+Contains:
+    draw_fractal() - the function which draws fractal
+    save_fractal() - the function which saves fractal
+    clear_gallery() - the function which clear gallery with fractals
+
+Author: Viktoria Chelpykh
+Date: 2026-05-06
+"""
+
+
 from tkinter import messagebox, filedialog
 
 import check_correct_input
@@ -11,6 +25,30 @@ def draw_fractal(entry_red, entry_green, entry_blue,
                  entry_width, entry_height, entry_xmin, 
                  entry_xmax, entry_ymin, entry_ymax,
                  entry_number, canvas, gallery):
+    """The function which draws fractal.
+    
+    The function check all inputs. If there are errors it show
+    a message about it. If all inputs correct the function
+    generate fractal, put it's image in canvas and add
+    it's image at the table.
+
+    Args:
+        entry_red (ctk.CTkEntry): The field for entry red color (0-255)
+        entry_green (ctk.CTkEntry): The field for entry green color (0-255)
+        entry_blue (ctk.CTkEntry): The field for entry blue color (0-255)
+        entry_width (ctk.CTkEntry): The field for entry width
+        entry_height (ctk.CTkEntry): The field for entry height
+        entry_xmin (ctk.CTkEntry): The field for entry minimum x coordinate of the fractal region
+        entry_xmax (ctk.CTkEntry): The field for entry maximum x coordinate of the fractal region
+        entry_ymin (ctk.CTkEntry): The field for entry minimum y coordinate of the fractal region
+        entry_ymax (ctk.CTkEntry): The field for entry maximum y coordinate of the fractal region
+        entry_number (ctk.CTkEntry): The field for entry number of iterations
+        canvas: Canvas for fractal
+        gallery: The frame where there are fractals images
+
+    Returns:
+        None
+    """
     global FRACTAL
     errors = set()
     width = check_correct_input.int_number(entry_width, "width")
@@ -55,6 +93,24 @@ def draw_fractal(entry_red, entry_green, entry_blue,
 
 
 def save_fractal():
+    """The function which saves fractal.
+
+    The function checks that fractal and its image exist.  If verification is successful,
+    a dialog box opens for selecting a save path.  Supports PNG and JPEG formats.
+
+    Global variables:
+        FRACTAL (object): Fractal object.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+    Raises:
+        PermissionError: Intercepted internally, displays a message to the user
+        OSError: Intercepted internally, displays a message to the user
+    """
     global FRACTAL
     if FRACTAL != None and FRACTAL.img != None:
         file_path = filedialog.asksaveasfilename(
@@ -79,7 +135,17 @@ def save_fractal():
 
 
 def clear_gallery(gallery):
+    """The function which clear gallery with fractals.
+    
+    The function clear the list ALL_IMAGES and delete all
+    objects at the gallery.
+
+    Args:
+        gallery: The frame where there are fractals images
+
+    Returns:
+        None
+    """
     fractal_new.ALL_IMAGES.clear()
     for widget in gallery.winfo_children():
         widget.destroy()
-        

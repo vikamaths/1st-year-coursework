@@ -1,9 +1,28 @@
+"""Module for creating a graphical interface.
+
+Creates all application panels: a panel for creating a fractal, 
+a panel for displaying a fractal, and a panel for all generated fractals.
+
+Contains:
+    FrameLeft - the class for the consciousness of the left control panel of the fractal
+    FrameRight - the class for creating a gallery
+    my_root() - application window creation function
+    my_canvas() - canvas creation function
+    show_in_center() - the function to display an image in the center of the canvas
+
+Author: Viktoria Chelpykh
+Date: 2026-05-06
+"""
+
+
 from PIL import Image
 import customtkinter as ctk
 from customtkinter import CTkImage
 
 
 class FrameLeft():
+    """The class for creating the left panel for
+    generation of fractals."""
     def __init__(self, root):
         self.frame_left = ctk.CTkFrame(root,
                                        width=400, 
@@ -18,6 +37,18 @@ class FrameLeft():
                              pady=(30))
     
     def main_header(self):
+        """The functon for left panel header.
+        
+        The function create text, put image and
+        also paint a line which divides the header
+        and different sections.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         frame_header = ctk.CTkFrame(self.frame_left,
                                     fg_color="#242830")
         frame_header.pack(fill='x',
@@ -46,6 +77,17 @@ class FrameLeft():
                                   highlightthickness=0)
         line_left.pack(fill='x', pady=(10,10))
         def draw_line(event=None):
+            """The function create new line when 
+            window's width was change.
+            
+            Args:
+                event (tk.Event): A resize event,
+                                  contains the widget's 
+                                  new width
+                
+            Returns:
+                None
+            """
             line_left.delete("all")  
             line_left.create_line(0, 0, line_left.winfo_width(), 0, 
                                   fill="#454545", width=1)
@@ -53,6 +95,16 @@ class FrameLeft():
         line_left.bind("<Configure>", draw_line)
 
     def color_header(self):
+        """The functon for header of color section.
+    
+        The function create text and put image.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -74,6 +126,21 @@ class FrameLeft():
                                              anchor='center')
         
     def color_entry(self):
+        """The function does fields for
+        colors' entries.
+        
+        The function does fileds for red,
+        green and blue colors.
+
+        Args:
+            None
+
+        Returns:
+            tuple: A tuple of three objects CustomTkinter Entry in order:
+            - entry_red (ctk.CTkEntry): The field for entry red color (0-255)
+            - entry_green (ctk.CTkEntry): The field for entry green color (0-255)
+            - entry_blue (ctk.CTkEntry): The field for entry blue color (0-255)
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -101,6 +168,16 @@ class FrameLeft():
         return entry_red, entry_green, entry_blue
 
     def resolution_header(self):
+        """The functon for header of resolution section.
+    
+        The function create text and put image.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -121,6 +198,19 @@ class FrameLeft():
                      text_color='white').pack(side='left', anchor='center')
 
     def resolution_entry(self):
+        """The function does fields for
+        resolution's entries.
+        
+        The function does filed for width and height.
+
+        Args:
+            None
+
+        Returns:
+            tuple: A tuple of two objects CustomTkinter Entry in order:
+            - entry_width (ctk.CTkEntry): The field for entry width
+            - entry_height (ctk.CTkEntry): The field for entry height
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -142,6 +232,16 @@ class FrameLeft():
         return entry_width, entry_height
 
     def coordinates_header(self):
+        """The functon for header of coordinates section.
+    
+        The function create text and put image.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -162,6 +262,20 @@ class FrameLeft():
                      text_color='white').pack(side='left', anchor='center')
         
     def coordinates_entry_x(self):
+        """The function does fields for
+        coordinates of the fractal region's entries.
+        
+        The function does fileds for minimum and maximum
+        x coordinates.
+
+        Args:
+            None
+
+        Returns:
+            tuple: A tuple of two objects CustomTkinter Entry in order:
+            - entry_xmin (ctk.CTkEntry): The field for entry minimum x coordinate of the fractal region
+            - entry_xmax (ctk.CTkEntry): The field for entry maximum x coordinate of the fractal region
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -183,6 +297,20 @@ class FrameLeft():
         return entry_xmin, entry_xmax
 
     def coordinates_entry_y(self):
+        """The function does fields for
+        coordinates of the fractal region's entries.
+        
+        The function does fileds for minimum and maximum
+        y coordinates.
+
+        Args:
+            None
+
+        Returns:
+            tuple: A tuple of two objects CustomTkinter Entry in order:
+            - entry_ymin (ctk.CTkEntry): The field for entry minimum y coordinate of the fractal region
+            - entry_ymax (ctk.CTkEntry): The field for entry maximum y coordinate of the fractal region
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -204,6 +332,16 @@ class FrameLeft():
         return entry_ymin, entry_ymax
 
     def number_of_iterations_header(self):
+        """The functon for header of number of iterations section.
+    
+        The function create text and put image.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -224,6 +362,15 @@ class FrameLeft():
                      text_color='white').pack(side='left', anchor='center')
 
     def number_of_iterations_entry(self):
+        """The function does field for
+        number of iterations's entry.
+
+        Args:
+            None
+
+        Returns:
+            entry_number (ctk.CTkEntry): The field for entry number of iterations
+        """  
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x', padx=40)
@@ -237,6 +384,18 @@ class FrameLeft():
         return entry_number
     
     def buttons(self, function_1, function_2):
+        """The function create buttons in the left frame.
+        
+        The function does button for fractal generation
+        and button for saving fractal.
+
+        Args:
+            function_1: function for fractal generation
+            function_2: function for saving fractal
+
+        Returns:
+            None
+        """
         block = ctk.CTkFrame(self.frame_left,
                              fg_color="#242830")
         block.pack(fill='x',
@@ -256,6 +415,9 @@ class FrameLeft():
     
 
 class FrameRight():
+    """Class for the consciousness of
+    the left control panel of the fractal.
+    """
     def __init__(self, root):
         self.frame_right = ctk.CTkScrollableFrame(root,
                                                   width=400,
@@ -269,6 +431,14 @@ class FrameRight():
                               pady=30)
 
     def gallery_header(self):
+        """The function generates the gallery title.
+
+        Args:
+            None
+        
+        Returns:
+            None
+        """
         frame_right_title = ctk.CTkFrame(self.frame_right,
                                          fg_color="#242830")
         frame_right_title.pack(fill='x', pady=(0, 60))
@@ -286,6 +456,16 @@ class FrameRight():
         line_right.pack(fill='x', pady=(10, 0))
 
         def draw_line(event=None):
+            """The function draws a dividing line between
+            the gallery title and the gallery.
+
+            Args:
+                event (tk.Event): A resize event,
+                                  contains the widget's new width
+
+            Returns:
+                None
+            """
             line_right.delete("all")
             line_right.create_line(0, 0, line_right.winfo_width(), 0, 
                                    fill="#454545", width=1)
@@ -293,6 +473,14 @@ class FrameRight():
         line_right.bind("<Configure>", draw_line)
 
     def real_gallery(self):
+        """The function creates a gallery.
+
+        Args:
+            None
+        
+        Returns:
+            frame_right_gallery: The frame where will be fractals images
+        """
         frame_right_gallery = ctk.CTkFrame(self.frame_right,
                                            fg_color="#242830")
         frame_right_gallery.pack(fill='both', expand=True)
@@ -301,6 +489,14 @@ class FrameRight():
         return frame_right_gallery
     
     def clear_button(self, clear_function):
+        """The function create button which can clear the gallery.
+
+        Args:
+            clear_function: The fucnction which clear content in the gallery
+
+        Returns:
+            None
+        """
         button_frame = ctk.CTkFrame(self.frame_right,
                                     fg_color= "#242830")
         button_frame.pack(fill='x',
@@ -313,10 +509,18 @@ class FrameRight():
                                fg_color='#5355EA',
                                command=clear_function)
         button.pack(padx=20, pady=10, fill='x')
-        
 
 
 def my_root():
+    """Application window creation function.
+
+    Args:
+        None
+
+    Returns:
+        root: Application window
+
+    """
     root = ctk.CTk()
     root.geometry(f"{root.winfo_screenwidth()}x{root.winfo_screenheight()}+0+0")
     root.title('Фрактал Мандельброта')
@@ -326,6 +530,14 @@ def my_root():
 
 
 def my_canvas(root):
+    """Canvas creation function
+
+    Args:
+        root: Application window
+
+    Returns:
+        None
+    """
     frame_center = ctk.CTkFrame(root,
                                 fg_color="#242830",
                                 corner_radius=30,
@@ -345,6 +557,15 @@ def my_canvas(root):
                 padx=15,
                 pady=30)
     def draw_text():
+        """The text function 'There will be a fractal here!'
+        in the center of the canvas
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         canvas.delete("all")
         canvas.create_text(canvas.winfo_width()//2,
                            canvas.winfo_height()//2,
@@ -358,6 +579,15 @@ def my_canvas(root):
 
 
 def show_in_center(canvas, img):
+    """Places the fractal image in the center of the canvas.
+
+    Args:
+        canvas: Canvas for fractal
+        img: Fractal image
+
+    Returns:
+        None
+    """
     canvas.delete("all")
     canvas.create_image(canvas.winfo_width()//2, 
                         canvas.winfo_height()//2,
