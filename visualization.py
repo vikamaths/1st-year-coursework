@@ -24,20 +24,20 @@ class FrameLeft():
                           padx=40,
                           pady=(40, 30))
 
-        circle_image_1 = CTkImage(light_image=Image.open("Group 2.png"), 
-                                dark_image=Image.open("Group 2.png"),
+        circle_image = CTkImage(light_image=Image.open("img/Group 2.png"), 
+                                dark_image=Image.open("img/Group 2.png"),
                                 size=(62,62))
 
-        label_circle_1 = ctk.CTkLabel(frame_header,
-                                      image=circle_image_1,
-                                      text="")
-        label_circle_1.pack(side='left', padx=(0,20))
+        label_circle = ctk.CTkLabel(frame_header,
+                                    image=circle_image,
+                                    text="")
+        label_circle.pack(side='left', padx=(0,20))
 
         ctk.CTkLabel(frame_header,
-                    text='MANDELBROTH\nFRACTAL',
-                    font=('Montserrat', 25, 'bold'),
-                    text_color = '#5355EA',
-                    justify="left").pack(side='left', anchor="center")
+                     text='MANDELBROTH\nFRACTAL',
+                     font=('Montserrat', 25, 'bold'),
+                     text_color = '#5355EA',
+                     justify="left").pack(side='left', anchor="center")
 
         line_left = ctk.CTkCanvas(self.frame_left,
                                   width=self.frame_left.winfo_width(),
@@ -59,8 +59,8 @@ class FrameLeft():
                    padx=40,
                    pady=(30, 15))
         
-        circle_image = CTkImage(light_image=Image.open("Group 3.png"),
-                                dark_image=Image.open("Group 3.png"),
+        circle_image = CTkImage(light_image=Image.open("img/Group 3.png"),
+                                dark_image=Image.open("img/Group 3.png"),
                                 size=(45,45))
         label_circle = ctk.CTkLabel(block,
                                     image=circle_image,
@@ -107,8 +107,8 @@ class FrameLeft():
                    padx=40,
                    pady=(0, 15))
 
-        circle_image = CTkImage(light_image=Image.open('Group 4.png'),
-                                dark_image=Image.open('Group 4.png'),
+        circle_image = CTkImage(light_image=Image.open('img/Group 4.png'),
+                                dark_image=Image.open('img/Group 4.png'),
                                 size=(45,45))
         label_circle = ctk.CTkLabel(block,
                                     image=circle_image,
@@ -148,8 +148,8 @@ class FrameLeft():
                    padx=40,
                    pady=(0, 15))
 
-        circle_image = CTkImage(light_image=Image.open('Group 5.png'),
-                                dark_image=Image.open('Group 5.png'),
+        circle_image = CTkImage(light_image=Image.open('img/Group 5.png'),
+                                dark_image=Image.open('img/Group 5.png'),
                                 size=(45, 45))
         label_circle = ctk.CTkLabel(block,
                                     image=circle_image,
@@ -210,8 +210,8 @@ class FrameLeft():
                    padx=40,
                    pady=(0, 15))
 
-        circle_image = CTkImage(light_image=Image.open('Group 6.png'),
-                                dark_image=Image.open('Group 6.png'),
+        circle_image = CTkImage(light_image=Image.open('img/Group 6.png'),
+                                dark_image=Image.open('img/Group 6.png'),
                                 size=(45, 45))
         label_circle = ctk.CTkLabel(block,
                                     image=circle_image,
@@ -320,7 +320,7 @@ def my_root():
     root = ctk.CTk()
     root.geometry(f"{root.winfo_screenwidth()}x{root.winfo_screenheight()}+0+0")
     root.title('Фрактал Мандельброта')
-    root.iconbitmap('calculating.ico')
+    root.iconbitmap('img/calculating.ico')
     root.configure(fg_color='#161A22')
     return root
 
