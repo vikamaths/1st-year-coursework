@@ -75,7 +75,7 @@ class FrameLeft():
                                   height=1,
                                   bg="#242830",
                                   highlightthickness=0)
-        line_left.pack(fill='x', pady=(10,10))
+        line_left.pack(fill='x', pady=(0,0))
         def draw_line(event=None):
             """The function create new line when 
             window's width was change.
@@ -414,21 +414,38 @@ class FrameLeft():
                       command=function_2).pack(side='left', padx=(8, 0))
     
 
-class FrameRight():
-    """Class for the consciousness of
-    the left control panel of the fractal.
-    """
+class FrameRight:
+    """Right control panel with gallery and clear button."""
+
     def __init__(self, root):
-        self.frame_right = ctk.CTkScrollableFrame(root,
-                                                  width=400,
-                                                  fg_color="#242830",
-                                                  corner_radius=30, 
-                                                  border_width=1,
-                                                  border_color="#454545")
-        self.frame_right.pack(side="right",
-                              fill='y',
-                              padx=(15, 30),
-                              pady=30)
+        self.right_container = ctk.CTkFrame(root,
+                                            width=400,
+                                            fg_color="#242830",
+                                            corner_radius=30,
+                                            border_width=1,
+                                            border_color="#454545")
+        self.right_container.pack(side="right", fill="y",
+                                  padx=(15, 30), pady=30)
+        
+        self.header_frame = ctk.CTkFrame(self.right_container,
+                                         fg_color="transparent")
+        self.header_frame.pack(fill="x", padx=15, pady=(15, 5))
+
+        self.scroll_container = ctk.CTkScrollableFrame(self.right_container,
+                                                       width=380,
+                                                       fg_color="transparent",
+                                                       corner_radius=0,
+                                                       border_width=0)
+        self.scroll_container.pack(fill="both",
+                                   expand=True,
+                                   padx=10,
+                                   pady=10)
+
+        self.bottom_frame = ctk.CTkFrame(self.right_container,
+                                         fg_color="transparent")
+        self.bottom_frame.pack(fill="x",
+                               padx=40,
+                               pady=(10, 25))
 
     def gallery_header(self):
         """The function generates the gallery title.
@@ -439,21 +456,22 @@ class FrameRight():
         Returns:
             None
         """
-        frame_right_title = ctk.CTkFrame(self.frame_right,
+        frame_right_title = ctk.CTkFrame(self.header_frame,
                                          fg_color="#242830")
-        frame_right_title.pack(fill='x', pady=(0, 60))
+        frame_right_title.pack(fill='x',
+                               pady=(20, 10),
+                               padx=15)
 
-        
         ctk.CTkLabel(frame_right_title,
-                     text='Story',
+                     text='STORY',
                      font=('Montserrat', 25, 'bold'),
                      text_color='#5355EA').pack(anchor="w")
-    
+
         line_right = ctk.CTkCanvas(frame_right_title,
-                          height=1,
-                          bg="#242830",
-                          highlightthickness=0)
-        line_right.pack(fill='x', pady=(10, 0))
+                                   height=1,
+                                   bg="#242830",
+                                   highlightthickness=0)
+        line_right.pack(fill='x', pady=(40, 0))
 
         def draw_line(event=None):
             """The function draws a dividing line between
@@ -467,8 +485,8 @@ class FrameRight():
                 None
             """
             line_right.delete("all")
-            line_right.create_line(0, 0, line_right.winfo_width(), 0, 
-                                   fill="#454545", width=1)
+            line_right.create_line(0, 0, line_right.winfo_width(),
+                                   0, fill="#454545", width=1)
 
         line_right.bind("<Configure>", draw_line)
 
@@ -481,13 +499,11 @@ class FrameRight():
         Returns:
             frame_right_gallery: The frame where will be fractals images
         """
-        frame_right_gallery = ctk.CTkFrame(self.frame_right,
+        frame_right_gallery = ctk.CTkFrame(self.scroll_container,
                                            fg_color="#242830")
         frame_right_gallery.pack(fill='both', expand=True)
-        frame_right_gallery.grid_rowconfigure(0, weight=1)
-        frame_right_gallery.grid_columnconfigure(0, weight=1)
         return frame_right_gallery
-    
+
     def clear_button(self, clear_function):
         """The function create button which can clear the gallery.
 
@@ -497,18 +513,12 @@ class FrameRight():
         Returns:
             None
         """
-        button_frame = ctk.CTkFrame(self.frame_right,
-                                    fg_color= "#242830")
-        button_frame.pack(fill='x',
-                          side="bottom",
-                          padx=40,
-                          pady=40)
-        
-        button = ctk.CTkButton(button_frame,
+        button = ctk.CTkButton(self.bottom_frame,
                                text="Clear",
+                               font=('Montserrat', 20, 'bold'),
                                fg_color='#5355EA',
                                command=clear_function)
-        button.pack(padx=20, pady=10, fill='x')
+        button.pack(fill="x", padx=10, pady=10)
 
 
 def my_root():
