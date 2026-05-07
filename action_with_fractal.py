@@ -137,8 +137,9 @@ def save_fractal():
 def clear_gallery(gallery):
     """The function which clear gallery with fractals.
     
-    The function clear the list ALL_IMAGES and delete all
-    objects at the gallery.
+    The function checks at the gallery are there images of fractals.
+    If they are the function clears gallery but if not it shows
+    a message anout if. 
 
     Args:
         gallery: The frame where there are fractals images
@@ -146,6 +147,12 @@ def clear_gallery(gallery):
     Returns:
         None
     """
+
+    children = gallery.winfo_children()
+    if len(children) == 0:
+        messagebox.showinfo("Ошибка!", "Галерея уже пуста")
+        return
+    
     fractal_new.ALL_IMAGES.clear()
-    for widget in gallery.winfo_children():
+    for widget in children():
         widget.destroy()
